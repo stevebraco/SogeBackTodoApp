@@ -15,6 +15,7 @@ mongoose.connect(process.env.MONGO_DB,
   (err, db) => {
   if (!err) {
           console.log("MongoDb Connected");
+          console.log(db.name);
         } else {
           console.log("Error Connection");
         }
