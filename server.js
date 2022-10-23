@@ -27,7 +27,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.use("/api/users", taskRouter);
+app.use("/api/tasks", taskRouter);
 
 const port = process.env.PORT || 7000;
 
