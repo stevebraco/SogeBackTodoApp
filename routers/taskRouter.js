@@ -1,11 +1,10 @@
-import express from "express";
-import Task from "../models/taskModel.js";
-import data from "../data.js";
+import express from 'express';
+import Task from '../models/taskModel.js';
+import data from '../data.js';
 
-const taskRouter = express.Router()
+const taskRouter = express.Router();
 
-
-taskRouter.get("/seed", async (req, res) => {
+taskRouter.get('/seed', async (req, res) => {
   const createdTasks = await Task.insertMany(data);
   try {
     res.send({ createdTasks });
@@ -14,21 +13,20 @@ taskRouter.get("/seed", async (req, res) => {
   }
 });
 
-taskRouter.post("/", async (req, res) => {
+taskRouter.post('/', async (req, res) => {
   const task = new Task({
-    ...req.body
+    ...req.body,
   });
-  
+
   const createdTask = await task.save();
   try {
-    res.send({ message: "Product Created", product: createdTask });
+    res.send({ message: 'Product Created', product: createdTask });
   } catch (error) {
     res.status(404).send({ message: error.message });
   }
 });
 
-
-taskRouter.get("/", async (req, res) => {
+taskRouter.get('/', async (req, res) => {
   const users = await Task.find();
   try {
     res.send(users);
@@ -64,7 +62,7 @@ taskRouter.delete('/:id', async (req, res) => {
   }
 });
 
-taskRouter.put("/:id", async (req, res) => {
+taskRouter.put('/:id', async (req, res) => {
   const task = await Task.findById(req.params.id);
   try {
     if (task) {
@@ -73,13 +71,13 @@ taskRouter.put("/:id", async (req, res) => {
       task.completed = req.body.completed;
       task.date = req.body.date;
       const updatedTask = await task.save();
-      res.send({ message: "Task Updated", task: updatedTask });
+      res.send({ message: 'Task Updated', task: updatedTask });
     } else {
-      res.status(404).send({ message: "Task Not Found" });
+      res.status(404).send({ message: 'Task Not Found' });
     }
   } catch (error) {
     res.status(404).send({ message: error.message });
   }
 });
 
-export default taskRouter
+export default taskRouter;
