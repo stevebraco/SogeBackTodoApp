@@ -5,6 +5,8 @@ import data from '../data.js';
 const taskRouter = express.Router();
 
 taskRouter.get('/seed', async (req, res) => {
+  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
   const createdTasks = await Task.insertMany(data);
   try {
     res.send({ createdTasks });
@@ -14,6 +16,8 @@ taskRouter.get('/seed', async (req, res) => {
 });
 
 taskRouter.post('/', async (req, res) => {
+  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
   const task = new Task({
     ...req.body,
   });
@@ -27,6 +31,8 @@ taskRouter.post('/', async (req, res) => {
 });
 
 taskRouter.get('/', async (req, res) => {
+  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
   const users = await Task.find();
   try {
     res.send(users);
@@ -36,6 +42,8 @@ taskRouter.get('/', async (req, res) => {
 });
 
 taskRouter.get('/:id', async (req, res) => {
+  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
   const task = await Task.findById(req.params.id);
   try {
     if (task) {
@@ -49,6 +57,8 @@ taskRouter.get('/:id', async (req, res) => {
 });
 
 taskRouter.delete('/:id', async (req, res) => {
+  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
   const task = await Task.findById(req.params.id);
   try {
     if (task) {
@@ -63,6 +73,8 @@ taskRouter.delete('/:id', async (req, res) => {
 });
 
 taskRouter.put('/:id', async (req, res) => {
+  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
   const task = await Task.findById(req.params.id);
   try {
     if (task) {
