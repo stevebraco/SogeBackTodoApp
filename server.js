@@ -10,7 +10,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect(process.env.MONGO_DB, (err, db) => {
+mongoose.connect(process.env.MONGO_DB,{
+  dbName: "toDoApp",
+} ,(err, db) => {
   if (!err) {
     console.log('MongoDb Connected');
     console.log(db.name);
